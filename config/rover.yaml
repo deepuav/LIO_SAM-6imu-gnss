@@ -1,14 +1,14 @@
 liorf:
 
   # Topics
-  pointCloudTopic: "rslidar_points"               # Point cloud data
-  imuTopic: "imu/data"                         # IMU data
-  odomTopic: "odometry/imu"                   # IMU pre-preintegration odometry, same frequency as IMU
-  gpsTopic: "gps/fixz"                   # GPS odometry topic from navsat, see module_navsat.launch file
+  pointCloudTopic: "/rslidar_points"               # Point cloud data
+  imuTopic: "/imu/data"                         # IMU data
+  odomTopic: "/odometry/imu"                   # IMU pre-preintegration odometry, same frequency as IMU
+  gpsTopic: "/ublox/fix"                   # GPS odometry topic from navsat, see module_navsat.launch file
 
   # Frames
   lidarFrame: "rslidar"
-  baselinkFrame: "rslidar"
+  baselinkFrame: "base_link"
   odometryFrame: "odom"
   mapFrame: "map"
 
@@ -58,7 +58,7 @@ liorf:
                   0, 0, -1]
 
   # voxel filter paprams
-  mappingSurfLeafSize: 0.1                      # default: 0.4 - outdoor, 0.2 - indoor
+  mappingSurfLeafSize: 0.4                      # default: 0.4 - outdoor, 0.2 - indoor
 
   # robot motion constraint (in case you are using a 2D robot)
   z_tollerance: 1000                            # meters

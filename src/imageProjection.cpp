@@ -581,7 +581,7 @@ public:
             thisPoint.z = laserCloudIn->points[i].z;
             thisPoint.intensity = laserCloudIn->points[i].intensity;
 
-            float range = common_lib_->pointDistance(thisPoint);
+            float range = pointDistance(thisPoint);
             if (range < lidarMinRange || range > lidarMaxRange)
                 continue;
 
@@ -612,8 +612,6 @@ public:
 int main(int argc, char** argv)
 {
     ros::init(argc, argv, "liorf");
-
-    common_lib_ = std::make_shared<CommonLib::common_lib>("mapping");
 
     ImageProjection IP;
     
