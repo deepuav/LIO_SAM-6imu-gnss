@@ -282,6 +282,10 @@ public:
         timeScanCur = cloudHeader.stamp.toSec();
         timeScanEnd = timeScanCur + laserCloudIn->points.back().time;
 
+        // remove Nan
+        vector<int> indices;
+        pcl::removeNaNFromPointCloud(*laserCloudIn, *laserCloudIn, indices);
+
         // check dense flag
         if (laserCloudIn->is_dense == false)
         {
@@ -315,7 +319,7 @@ public:
             deskewFlag = -1;
             for (auto &field : currentCloudMsg.fields)
             {
-                if (field.name == "time" || field.name == "t")
+                if (field.name == "time" || field.name == "t" || field.name == "timestamp")
                 {
                     deskewFlag = 1;
                     break;
@@ -577,7 +581,7 @@ public:
             thisPoint.z = laserCloudIn->points[i].z;
             thisPoint.intensity = laserCloudIn->points[i].intensity;
 
-            float range = common_lib_->pointDistance(thisPoint);
+            float range = pointDistance(thisPoint);
             if (range < lidarMinRange || range > lidarMaxRange)
                 continue;
 
@@ -608,8 +612,6 @@ public:
 int main(int argc, char** argv)
 {
     ros::init(argc, argv, "liorf");
-
-    common_lib_ = std::make_shared<CommonLib::common_lib>("mapping");
 
     ImageProjection IP;
     

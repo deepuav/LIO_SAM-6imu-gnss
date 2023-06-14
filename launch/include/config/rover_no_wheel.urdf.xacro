@@ -5,6 +5,7 @@
   <link name="chassis_link"></link>
 
   <link name="base_link"></link>
+
   <joint name="base_link_joint" type="fixed">
     <parent link="base_link"/>
     <child link="chassis_link" />
@@ -12,6 +13,7 @@
   </joint>
 
   <link name="imu_link"> </link>
+
   <joint name="imu_joint" type="fixed">
     <parent link="chassis_link" />
     <child link="imu_link" />
@@ -19,6 +21,7 @@
   </joint>
 
   <link name="lidar_link"> </link>
+
   <joint name="velodyne_joint" type="fixed">
     <parent link="chassis_link" />
     <child link="lidar_link" />
@@ -26,6 +29,7 @@
   </joint>
 
   <link name="navsat_link"> </link>
+  
   <joint name="navsat_joint" type="fixed">
     <parent link="chassis_link" />
     <child link="navsat_link" />

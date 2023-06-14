@@ -12,7 +12,6 @@
 #include <sensor_msgs/NavSatFix.h>
 #include <nav_msgs/Odometry.h>
 #include <nav_msgs/Path.h>
-#include <common_lib.h>
 #include <visualization_msgs/Marker.h>
 #include <visualization_msgs/MarkerArray.h>
 
@@ -61,8 +60,6 @@ using namespace std;
 typedef pcl::PointXYZI PointType;
 
 // <!-- liorf_localization_yjz_lucky_boy -->
-std::shared_ptr<CommonLib::common_lib> common_lib_;
-
 enum class SensorType { VELODYNE, OUSTER, LIVOX, ROBOSENSE, MULRAN};
 
 class ParamServer
@@ -339,5 +336,19 @@ void imuRPY2rosRPY(sensor_msgs::Imu *thisImuMsg, T *rosRoll, T *rosPitch, T *ros
     *rosPitch = imuPitch;
     *rosYaw = imuYaw;
 }
+
+template<typename T> 
+float pointDistance(const T& p)
+{
+    return sqrt(pow(p.x, 2) + pow(p.y, 2) + pow(p.z, 2));
+}
+
+template<typename T> 
+float pointDistance(const T& p1, const T& p2)
+{
+    return sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2) + pow(p1.z - p2.z, 2));
+}
+
+
 
 #endif
